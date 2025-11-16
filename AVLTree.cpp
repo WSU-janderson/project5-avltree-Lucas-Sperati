@@ -65,8 +65,26 @@ bool AVLTree::remove(AVLNode *&current, KeyType key) {
 void AVLTree::balanceNode(AVLNode *&node) {
 }
 
+//---------------------------------------------------------------
+
+//Inserts a new key-value pair into the tree. After a successful insert the tree is rebalanced if needed.
+//No duplicates. Should return true if insertion was successful and false if not
+//Time complexity must be 0(log2 n)
 bool AVLTree::insert(const std::string& key, size_t value){
 
 }
 
+//if the key exists remove will delete the key-value pair from the tree. Memory allocated to the node that
+//gets removed is released. After removing the key-value pair is rebalanced if necessary. If key gets removed
+//then returns true, false otherwise.
+//Time complexity must be 0(log2 n)
+bool AVLTree::remove(const std::string& key) {
+
+}
+
+//Returns true if the key is in the tree and false otherwise
+//Time complexity must be 0(log2 n)
+bool AVLTree::contains(const std::string& key) const {
+
+}
 
