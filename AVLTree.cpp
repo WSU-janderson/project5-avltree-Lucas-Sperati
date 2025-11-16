@@ -1,7 +1,7 @@
 #include "AVLTree.h"
 
 #include <string>
-//test
+
 size_t AVLTree::AVLNode::numChildren() const {
     return 0;
 }
@@ -64,3 +64,9 @@ bool AVLTree::remove(AVLNode *&current, KeyType key) {
 
 void AVLTree::balanceNode(AVLNode *&node) {
 }
+
+bool AVLTree::insert(const std::string& key, size_t value){
+
+}
+
+

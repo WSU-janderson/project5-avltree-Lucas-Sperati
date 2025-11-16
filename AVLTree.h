@@ -29,14 +29,9 @@ protected:
         bool isLeaf() const;
         // number of hops to deepest leaf node
         size_t getHeight() const;
-
-
     };
 
 public:
-
-
-
 
     private:
     AVLNode* root;
@@ -49,6 +44,7 @@ public:
     // You will implement this, but it is needed for removeNode()
     void balanceNode(AVLNode*& node);
 
+    bool insert(const std::string &key, size_t value);
 };
 
 #endif //AVLTREE_H
