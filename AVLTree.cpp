@@ -69,13 +69,15 @@ void AVLTree::balanceNode(AVLNode *&node) {
 
 //---------------------------------------------------------------
 
+//todo recursion
 //Inserts a new key-value pair into the tree. After a successful insert the tree is rebalanced if needed.
 //No duplicates. Should return true if insertion was successful and false if not
 //Time complexity must be 0(log2 n)
-bool AVLTree::insert(const std::string& key, size_t value){
+bool AVLTree::insert(const std::string& key, size_t value) {
 
 }
 
+//todo recursion
 //if the key exists remove will delete the key-value pair from the tree. Memory allocated to the node that
 //gets removed is released. After removing the key-value pair is rebalanced if necessary. If key gets removed
 //then returns true, false otherwise.
@@ -84,12 +86,14 @@ bool AVLTree::remove(const std::string& key) {
 
 }
 
+//todo recursion
 //Returns true if the key is in the tree and false otherwise
 //Time complexity must be 0(log2 n)
 bool AVLTree::contains(const std::string& key) const {
 
 }
 
+//todo recursion
 //if the key is found get will return the value associated with the key. If the key is not found it will
 //return std::nullopt. If it is found it will return std::optional<size_t>
 //time complexity must be O(log2 n)
@@ -97,6 +101,7 @@ std::optional<size_t> AVLTree::get(const std::string& key) const {
 
 }
 
+//todo recursion
 //returns the value stored in the node with the current key
 //can retrieve value by saying "int idNum = avlTree["James"];
 //can also update value associated with key by "avlTree["James"] = 1234;
@@ -106,6 +111,7 @@ std::string& AVLTree::operator[] (const size_t& key) {
 
 }
 
+//todo recursion
 //will return a std::vector of size_t containing all the values associated with keys >= lowKey and keys
 //<= highKey. For each key found in the given range, there will be one value in the vector. If no matching
 //key-value pairs are found the function should return an empty vector.
@@ -113,6 +119,7 @@ vector<std::string> AVLTree::findRange(const std::string& lowKey, const std::str
 
 }
 
+//todo recursion
 //returns a vector with all the keys currently in the tree. The length of the vector should be the same
 //as the size of the tree
 std::vector<std::string> AVLTree::keys() const {
@@ -125,3 +132,30 @@ size_t AVLTree::size() const {
 
 }
 
+//returns height of the AVL tree
+//time complexity should be O(1)
+size_t AVLTree::getHeight() const {
+
+}
+
+//todo recursion
+//copy constructor
+AVLTree::AVLTree(const AVLTree& other) {
+
+}
+
+//todo recursion
+//assignment operator
+//makes deep copy of the other tree
+void AVLTree::operator=(const AVLTree& other) {
+
+}
+
+//todo recursion
+//deconstructor
+//goes through all nodes using a postorder traversal and uses delete to release memory taken in each node
+AVLTree::~AVLTree() {
+
+}
+
+//todo don't forget the friend method again, dumb fuck

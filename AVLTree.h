@@ -63,6 +63,19 @@ public:
     std::vector<std::string> keys() const;
 
     size_t size() const;
+
+    size_t getHeight() const;
+
+    AVLTree(const AVLTree &other);
+
+    void operator=(const AVLTree &other);
+
+    ~AVLTree();
+
+    //prints out the tree
+    friend std::ostream &operator<<(std::ostream &os, const AVLTree &avlTree) {
+
+    }
 };
 
 #endif //AVLTREE_H
