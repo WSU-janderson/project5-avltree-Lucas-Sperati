@@ -37,6 +37,7 @@ public:
 
     private:
     AVLNode* root;
+    size_t treeHeight;
 
     /* Helper methods for remove */
     // this overloaded remove will do the recursion to remove the node
@@ -71,6 +72,8 @@ public:
     void operator=(const AVLTree &other);
 
     ~AVLTree();
+
+    AVLTree();
 
     //prints out the tree
     friend std::ostream &operator<<(std::ostream &os, const AVLTree &avlTree) {

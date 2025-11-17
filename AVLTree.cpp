@@ -65,6 +65,7 @@ bool AVLTree::remove(AVLNode *&current, KeyType key) {
 }
 
 void AVLTree::balanceNode(AVLNode *&node) {
+
 }
 
 //---------------------------------------------------------------
@@ -156,6 +157,12 @@ void AVLTree::operator=(const AVLTree& other) {
 //goes through all nodes using a postorder traversal and uses delete to release memory taken in each node
 AVLTree::~AVLTree() {
 
+}
+
+//default constructor, sets the root to null and the height to 0 since there is nothing yet
+AVLTree::AVLTree() {
+    root = nullptr;
+    treeHeight = 0;
 }
 
 //todo don't forget the friend method again, dumb fuck
