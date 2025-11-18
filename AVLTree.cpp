@@ -91,12 +91,38 @@ bool AVLTree::insert(const std::string& key, size_t value) {
         //calls the other insert function for the recursion stuff
         insertPart2(root, newNode);
     }
-
+    return true;//returns true if gotten to this point since the insert would have been successful.
 }
 
 bool AVLTree::insertPart2(AVLNode* parent, AVLNode* newNode ) {
+    while (newNode != nullptr) {
+        //if the newNode is less than the parent key then this runs
+        //i currently don't know what the fuck I'm doing so im just going off the zybooks code
+        if (newNode->key < parent->key ) {
 
+        }
+    }
 }
+//code from zybooks
+// if (node⇢key < currentNode⇢key) {
+//     if (currentNode⇢left is null) {
+//         currentNode⇢left = node
+//         currentNode = null
+//      }
+//     else {
+//         currentNode = currentNode⇢left
+//      }
+// }
+// else {
+//     if (currentNode⇢right is null) {
+//         currentNode⇢right = node
+//         currentNode = null
+//      }
+//     else {
+//         currentNode = currentNode⇢right
+//      }
+
+
 
 //todo recursion
 //if the key exists remove will delete the key-value pair from the tree. Memory allocated to the node that
