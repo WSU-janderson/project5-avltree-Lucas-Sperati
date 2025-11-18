@@ -75,6 +75,26 @@ void AVLTree::balanceNode(AVLNode *&node) {
 //No duplicates. Should return true if insertion was successful and false if not
 //Time complexity must be 0(log2 n)
 bool AVLTree::insert(const std::string& key, size_t value) {
+    //makes a new node with the key and value
+    AVLNode* newNode = new AVLNode(key, value);
+
+    //if the key already exists then the function returns false
+    if (contains(key) == true) {
+        return false;
+    }
+
+    //if the root is nullptr then the node is set to the root
+    if (root == nullptr) {
+        root = newNode;
+    }
+    else {
+        //calls the other insert function for the recursion stuff
+        insertPart2(root, newNode);
+    }
+
+}
+
+bool AVLTree::insertPart2(AVLNode* parent, AVLNode* newNode ) {
 
 }
 
