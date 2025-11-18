@@ -57,6 +57,8 @@ public:
 
     bool contains(const std::string &key) const;
 
+    bool contains2(AVLNode *&current, KeyType key) const;
+
     std::optional<size_t> get(const std::string &key) const;
 
     std::string &operator[](const size_t &key);

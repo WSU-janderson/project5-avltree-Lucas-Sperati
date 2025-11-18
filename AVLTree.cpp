@@ -135,13 +135,18 @@ void AVLTree::insertPart2(AVLNode* parent, AVLNode* newNode ) {
 //then returns true, false otherwise.
 //Time complexity must be 0(log2 n)
 bool AVLTree::remove(const std::string& key) {
-
+    //calls the recursive remove method that was given at the beginning of the assignment
+    return remove(root, key);
 }
 
 //todo recursion
 //Returns true if the key is in the tree and false otherwise
 //Time complexity must be 0(log2 n)
 bool AVLTree::contains(const std::string& key) const {
+    return contains(root,key);
+}
+//recursive methods for contains
+bool AVLTree::contains2(AVLNode*& current, KeyType key) const {
 
 }
 
