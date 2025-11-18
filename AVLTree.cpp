@@ -61,7 +61,25 @@ bool AVLTree::removeNode(AVLNode*& current){
 }
 
 bool AVLTree::remove(AVLNode *&current, KeyType key) {
-    return false;
+    //if the current node is nullptr then it returns false since the key doesn't exist
+    if (current == nullptr) {
+        return false;
+    }
+    //if the key to be removed is less than the current key
+    if (key < current->key) {
+        //makes the current key the left child and calls recursively
+        return remove(current->left, key);
+    }
+    //if the key to be removed is greater than the current key
+    if (key > current->key) {
+        //makes the current key the right child and calls recursively
+        return remove(current->right, key);
+    }
+    else {
+        //since the key would be found then it calls the removeNode method that was made for us
+        return removeNode(current);
+    }
+
 }
 
 void AVLTree::balanceNode(AVLNode *&node) {
@@ -129,11 +147,13 @@ void AVLTree::insertPart2(AVLNode* parent, AVLNode* newNode ) {
     //todo update height and balance parent node
 }
 
-//todo recursion
+
 //if the key exists remove will delete the key-value pair from the tree. Memory allocated to the node that
 //gets removed is released. After removing the key-value pair is rebalanced if necessary. If key gets removed
 //then returns true, false otherwise.
 //Time complexity must be 0(log2 n)
+//pretty much this calls this remove, then another remove with pointers and that pointer remove calls the method
+//to finally remove the node
 bool AVLTree::remove(const std::string& key) {
     //calls the recursive remove method that was given at the beginning of the assignment
     return remove(root, key);
@@ -143,11 +163,11 @@ bool AVLTree::remove(const std::string& key) {
 //Returns true if the key is in the tree and false otherwise
 //Time complexity must be 0(log2 n)
 bool AVLTree::contains(const std::string& key) const {
-    return contains(root,key);
+    return contains2(root, key);
 }
 //recursive methods for contains
-bool AVLTree::contains2(AVLNode*& current, KeyType key) const {
-
+bool AVLTree::contains2(const AVLNode* current, const KeyType& key) const {
+    //todo here
 }
 
 //todo recursion

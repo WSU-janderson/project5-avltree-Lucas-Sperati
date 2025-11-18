@@ -39,6 +39,7 @@ public:
     AVLNode* root;
     size_t treeHeight;
 
+
     /* Helper methods for remove */
     // this overloaded remove will do the recursion to remove the node
     bool remove(AVLNode*& current, KeyType key);
@@ -57,7 +58,7 @@ public:
 
     bool contains(const std::string &key) const;
 
-    bool contains2(AVLNode *&current, KeyType key) const;
+    bool contains2(const AVLNode *current, const KeyType &key) const;
 
     std::optional<size_t> get(const std::string &key) const;
 
