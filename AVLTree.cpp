@@ -102,51 +102,32 @@ void AVLTree::insertPart2(AVLNode* parent, AVLNode* newNode ) {
         //if the new key to insert is less than the parents key
         if (newNode->key < parent->key) {
             //and if the left child is nullptr
+            //left child conditions
             if (parent->left == nullptr) {
                 parent->left = newNode;
                 parent = nullptr;
                 //todo later set the parent of the newNode to the parent (I think)
             }
+            else {
+                //recursively calls insertPart2 again since the parent is the left child
+                insertPart2(parent->left, newNode);
+            }
         }
+        //right child conditions
         else {
-            //recursively calls insertPart2 again since the parent is the left child
-            insertPart2(parent->left, newNode);
-        }
-    }
-    //right child conditions
-    else {
-        if (parent->right == nullptr) {
-            parent->right = newNode;
-            parent = nullptr;
-            //todo later set the parent of the newNode to the parent (I think)
-        }
-        else {
-            //recursively calls insertPart2 again since the parent is the right child
-            insertPart2(parent->right, newNode);
+            if (parent->right == nullptr) {
+                parent->right = newNode;
+                parent = nullptr;
+                //todo later set the parent of the newNode to the parent (I think)
+            }
+            else {
+                //recursively calls insertPart2 again since the parent is the right child
+                insertPart2(parent->right, newNode);
+            }
         }
     }
     //todo update height and balance parent node
 }
-//code from zybooks
-// if (node⇢key < currentNode⇢key) {
-//     if (currentNode⇢left is null) {
-//         currentNode⇢left = node
-//         currentNode = null
-//      }
-//     else {
-//         currentNode = currentNode⇢left
-//      }
-// }
-// else {
-//     if (currentNode⇢right is null) {
-//         currentNode⇢right = node
-//         currentNode = null
-//      }
-//     else {
-//         currentNode = currentNode⇢right
-//      }
-
-
 
 //todo recursion
 //if the key exists remove will delete the key-value pair from the tree. Memory allocated to the node that
