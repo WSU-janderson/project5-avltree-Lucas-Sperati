@@ -51,7 +51,7 @@ public:
 
     bool insert(const std::string &key, size_t value);
 
-    bool insertPart2(AVLNode *parent, AVLNode *newNode);
+    void insertPart2(AVLNode *parent, AVLNode *newNode);
 
     bool remove(const std::string &key);
 
