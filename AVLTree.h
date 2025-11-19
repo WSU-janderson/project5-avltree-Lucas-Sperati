@@ -70,6 +70,8 @@ public:
 
     vector<std::string> findRange(const std::string &lowKey, const std::string &highKey) const;
 
+    void findRange2(AVLNode *current, const std::string &lowKey, const std::string &highKey, vector<string> &keysVector) const;
+
     std::vector<std::string> keys() const;
 
     size_t size() const;
