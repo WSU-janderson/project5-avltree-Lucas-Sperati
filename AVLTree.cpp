@@ -353,7 +353,22 @@ void AVLTree::operator=(const AVLTree& other) {
 //deconstructor
 //goes through all nodes using a postorder traversal and uses delete to release memory taken in each node
 AVLTree::~AVLTree() {
-
+    root = nullptr;
+    treeHeight = 0;
+    deconstructorMethod(root);
+}
+//helper method for the deconstructor. Clion autofilled all of it
+void AVLTree::deconstructorMethod(AVLNode *current) {
+    //reutrns if the current node us null
+    if (current == nullptr) {
+        return;
+    }
+    //deletes left child
+    deconstructorMethod(current->left);
+    delete current;
+    //deletes right child
+    deconstructorMethod(current->right);
+    delete current;
 }
 
 //default constructor, sets the root to null and the height to 0 since there is nothing yet

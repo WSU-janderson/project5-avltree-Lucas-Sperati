@@ -89,6 +89,8 @@ public:
 
     ~AVLTree();
 
+    void deconstructorMethod(AVLNode *current);
+
     AVLTree();
 
     //prints out the tree
