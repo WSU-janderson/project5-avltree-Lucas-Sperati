@@ -341,6 +341,11 @@ AVLTree::AVLNode* AVLTree::copyConstucter(const AVLNode* current) {
 //assignment operator
 //makes deep copy of the other tree
 void AVLTree::operator=(const AVLTree& other) {
+    //this is the assigment operator
+    //makes sure the current copy is not the same as the deep copy
+    if (this == &other) {
+        return;
+    }
 
 }
 
