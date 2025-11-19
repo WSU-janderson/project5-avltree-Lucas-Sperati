@@ -337,19 +337,29 @@ AVLTree::AVLNode* AVLTree::copyConstucter(const AVLNode* current) {
     copyConstucter(current->right);
 }
 
-//todo recursion
+
 //assignment operator
 //makes deep copy of the other tree
 void AVLTree::operator=(const AVLTree& other) {
     //this is the assigment operator
-    //makes sure the current copy is not the same as the deep copy
+    //makes sure there is no self assigment
     if (this == &other) {
         return;
     }
-
+    //cleans up everything before it makes the copy in the event there is some random stuff left behind
+    treeHeight = 0;
+    root = nullptr;
+    //reused the deconstructorMethod
+    deconstructorMethod(root);
+    //reused the copyConstucter
+    //also clion generated most of these lines. going to pretend like it knows what it's doing because I sure don't
+    //sets new root and tree
+    root = copyConstucter(other.root);
+    //copies the treeHeight
+    treeHeight = other.treeHeight;
 }
 
-//todo recursion
+
 //deconstructor
 //goes through all nodes using a postorder traversal and uses delete to release memory taken in each node
 AVLTree::~AVLTree() {
@@ -359,7 +369,7 @@ AVLTree::~AVLTree() {
 }
 //helper method for the deconstructor. Clion autofilled all of it
 void AVLTree::deconstructorMethod(AVLNode *current) {
-    //reutrns if the current node us null
+    //returns if the current node us null
     if (current == nullptr) {
         return;
     }
