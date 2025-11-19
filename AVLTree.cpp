@@ -184,7 +184,7 @@ std::optional<size_t> AVLTree::get(const std::string& key) const {
 //can also update value associated with key by "avlTree["James"] = 1234;
 //does not need to handle missing or invalid keys
 //time complexity must be O(log2 n)
-std::string& AVLTree::operator[] (const size_t& key) {
+size_t& AVLTree::operator[](const std::string& key) {
 
 }
 

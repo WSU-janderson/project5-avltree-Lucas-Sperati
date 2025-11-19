@@ -62,7 +62,7 @@ public:
 
     std::optional<size_t> get(const std::string &key) const;
 
-    std::string &operator[](const size_t &key);
+    size_t &operator[](const std::string &key);
 
     vector<std::string> findRange(const std::string &lowKey, const std::string &highKey) const;
 
