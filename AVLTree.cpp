@@ -190,8 +190,29 @@ bool AVLTree::contains2(const AVLNode* current, const KeyType& key) const {
 //return std::nullopt. If it is found it will return std::optional<size_t>
 //time complexity must be O(log2 n)
 std::optional<size_t> AVLTree::get(const std::string& key) const {
-
+    return get2(root, key);
 }
+//recursive method for get
+std::optional<size_t> AVLTree::get2(AVLNode *current, KeyType key) const {
+    //if the current is not found then it returns nullopt
+    if (current == nullptr) {
+        return std::nullopt;
+    }
+    //if it is found then it returns that value
+    if (key == current->key) {
+        return current -> value;
+    }
+    //goes to left node
+    if (key < current->key) {
+        return get2(current->left, key);
+    }
+    //goes to right node
+    else if (key > current->key) {
+        return get2(current->right, key);
+    }
+}
+
+
 
 //todo recursion
 //returns the value stored in the node with the current key

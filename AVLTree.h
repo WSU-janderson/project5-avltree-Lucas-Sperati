@@ -62,6 +62,8 @@ public:
 
     std::optional<size_t> get(const std::string &key) const;
 
+    std::optional<size_t> get2(AVLNode *current, KeyType key) const;
+
     size_t &operator[](const std::string &key);
 
     vector<std::string> findRange(const std::string &lowKey, const std::string &highKey) const;
