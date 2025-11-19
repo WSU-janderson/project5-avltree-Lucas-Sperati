@@ -74,6 +74,8 @@ public:
 
     std::vector<std::string> keys() const;
 
+    void keys2(AVLNode *current, vector<string> &keysVector) const;
+
     size_t size() const;
 
     size_t getHeight() const;
