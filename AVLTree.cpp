@@ -167,7 +167,22 @@ bool AVLTree::contains(const std::string& key) const {
 }
 //recursive methods for contains
 bool AVLTree::contains2(const AVLNode* current, const KeyType& key) const {
-    //todo here
+    //returns false if the key does not exist
+    if (current == nullptr) {
+        return false;
+    }
+    //if the keys match then it returns true
+    if (key == current->key) {
+        return true;
+    }
+    //if the key is less than the current then it runs contains2 again for the left child node
+    if (key < current->key) {
+        return contains2(current->left, key);
+    }
+    //if the key is greater than the current then it runs contains2 again for the right child node
+    else if (key > current->key) {
+        return contains2(current->right, key);
+    }
 }
 
 //todo recursion
