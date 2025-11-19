@@ -66,6 +66,8 @@ public:
 
     size_t &operator[](const std::string &key);
 
+    size_t &operator2(AVLNode *&current, KeyType key);
+
     vector<std::string> findRange(const std::string &lowKey, const std::string &highKey) const;
 
     std::vector<std::string> keys() const;

@@ -159,7 +159,7 @@ bool AVLTree::remove(const std::string& key) {
     return remove(root, key);
 }
 
-//todo recursion
+
 //Returns true if the key is in the tree and false otherwise
 //Time complexity must be 0(log2 n)
 bool AVLTree::contains(const std::string& key) const {
@@ -185,7 +185,7 @@ bool AVLTree::contains2(const AVLNode* current, const KeyType& key) const {
     }
 }
 
-//todo recursion
+
 //if the key is found get will return the value associated with the key. If the key is not found it will
 //return std::nullopt. If it is found it will return std::optional<size_t>
 //time complexity must be O(log2 n)
@@ -213,7 +213,6 @@ std::optional<size_t> AVLTree::get2(AVLNode *current, KeyType key) const {
 }
 
 
-
 //todo recursion
 //returns the value stored in the node with the current key
 //can retrieve value by saying "int idNum = avlTree["James"];
@@ -221,7 +220,23 @@ std::optional<size_t> AVLTree::get2(AVLNode *current, KeyType key) const {
 //does not need to handle missing or invalid keys
 //time complexity must be O(log2 n)
 size_t& AVLTree::operator[](const std::string& key) {
-
+    return operator2(root, key);
+}
+//recursive method for the operator
+//does not check for missing or invalid keys
+size_t &AVLTree::operator2(AVLNode *&current, KeyType key) {
+    //if the key is found it returns the value of that node
+    if (key == current->key) {
+        return current -> value;
+    }
+    //recursive call for left child
+    if (key < current->key) {
+        return operator2(current->left, key);
+    }
+    //recursive call for right child
+    else if (key > current->key) {
+        return operator2(current->right, key);
+    }
 }
 
 //todo recursion
