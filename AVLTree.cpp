@@ -318,10 +318,23 @@ size_t AVLTree::getHeight() const {
     return root->getHeight();
 }
 
-//todo recursion
+
 //copy constructor
 AVLTree::AVLTree(const AVLTree& other) {
-
+    root = copyConstucter(other.root);
+    treeHeight = other.treeHeight;
+}
+//recursive method to make a deep copy of the tree. It returns when the copy is finished.
+AVLTree::AVLNode* AVLTree::copyConstucter(const AVLNode* current) {
+    if (current == nullptr) {
+        return nullptr;
+    }
+    //inserts the current key and value into the deep copy
+    insert(current->key, current->value);
+    //runs for left children
+    copyConstucter(current->left);
+    //runs for right children
+    copyConstucter(current->right);
 }
 
 //todo recursion

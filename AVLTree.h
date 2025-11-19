@@ -82,6 +82,9 @@ public:
 
     AVLTree(const AVLTree &other);
 
+    AVLNode *copyConstucter(const AVLNode *current);
+
+
     void operator=(const AVLTree &other);
 
     ~AVLTree();
