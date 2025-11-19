@@ -12,8 +12,9 @@ bool AVLTree::AVLNode::isLeaf() const {
     return false;
 }
 
+//made this return height instead of 0
 size_t AVLTree::AVLNode::getHeight() const {
-    return 0;
+    return height;
 }
 
 bool AVLTree::removeNode(AVLNode*& current){
@@ -291,7 +292,7 @@ void AVLTree::keys2(AVLNode *current, vector<string> &keysVector) const {
     if (current == nullptr) {
         return;
     }
-    //todo
+    //todo this shit 100% don't work, fuck with the order of these
     //goes left, gets that node, if not current, goes right, goes until one passes and pops key to that vector
     keys2(current->left, keysVector);
     keys2(current->right, keysVector);
@@ -301,14 +302,20 @@ void AVLTree::keys2(AVLNode *current, vector<string> &keysVector) const {
 
 //returns how many key-value pairs are in the tree
 //time complexity should be O(1)
+//pretty sure this is just supposed to return the treeHeight
+//random side tangent because my head hurts, this class is hard and I should really pay attention more lol
 size_t AVLTree::size() const {
-
+    //returns treeHeight which should be the same as the number of key-value pairs
+    return treeHeight;
 }
+
+
 
 //returns height of the AVL tree
 //time complexity should be O(1)
 size_t AVLTree::getHeight() const {
-
+    //calls the other node getHight and returns the height in the node class
+    return root->getHeight();
 }
 
 //todo recursion
