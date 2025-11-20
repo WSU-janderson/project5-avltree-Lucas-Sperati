@@ -584,10 +584,7 @@ void AVLTree::operator=(const AVLTree& other) {
     if (this == &other) {
         return;
     }
-    //cleans up everything before it makes the copy in the event there is some random stuff left behind
-    treeHeight = 0;
-    root = nullptr;
-    //reused the deconstructorMethod
+    //deletes the old tree
     deconstructorMethod(root);
     //reused the copyConstucter
     //also clion generated most of these lines. going to pretend like it knows what it's doing because I sure don't
