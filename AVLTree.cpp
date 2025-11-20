@@ -189,8 +189,8 @@ AVLTree::AVLNode* AVLTree::rotateRight(AVLNode *&messedUpEvilNode) {
     updateTreeHeight(messedUpEvilNode);
     //updates height again since the parent of the messedUpEvilNode is the root
     updateTreeHeight(messedUpEvilNode->parent);
-    //returns true when successful
-    return leftRightChild;
+    //returns the new node
+    return messedUpEvilNode->parent;
 }
 //this function rotates the node on the tree to the left
 AVLTree::AVLNode* AVLTree::roatateLeft(AVLNode *&messedUpEvilNode) {
@@ -202,27 +202,28 @@ AVLTree::AVLNode* AVLTree::roatateLeft(AVLNode *&messedUpEvilNode) {
     if (messedUpEvilNode->right == nullptr) {
         return nullptr;
     }
-
-    AVLNode* leftRightChild = messedUpEvilNode->left->right;
+    //need two noded to check the left and right childs
+    AVLNode* rightChild = messedUpEvilNode->right;
+    AVLNode* leftChild = rightChild->left;
 
     //if node has a parent replaces node with its right child
     if (messedUpEvilNode->parent != nullptr) {
-        AVLTreeReplaceChild(messedUpEvilNode->parent, messedUpEvilNode, leftRightChild);
+        AVLTreeReplaceChild(messedUpEvilNode->parent, messedUpEvilNode, rightChild);
     }
     else {
         //node is root
-        root = leftRightChild;
+        root = rightChild;
         root-> parent = nullptr;
     }
     //set right child left child to messedUpEvilNode
-    AVLTreeSetChild(leftRightChild, "left", messedUpEvilNode);
-    //set right child to rightLeftChild
-    AVLTreeSetChild(messedUpEvilNode, "right", leftRightChild);
+    AVLTreeSetChild(rightChild, "left", messedUpEvilNode);
+    //set right child to leftChild
+    AVLTreeSetChild(messedUpEvilNode, "right", leftChild);
     //update heights
     updateTreeHeight(messedUpEvilNode);
-    updateTreeHeight(leftRightChild);  // new subtree root after rotation
+    updateTreeHeight(rightChild);  // new subtree root after rotation
     //return root once done
-    return leftRightChild;
+    return rightChild;
 }
 //this function sets the left and right child based on the parameter used with rotation. Taken from zybooks
 bool AVLTree::AVLTreeSetChild(AVLNode *parent, const std::string &leftOrRight ,AVLNode *child) {
