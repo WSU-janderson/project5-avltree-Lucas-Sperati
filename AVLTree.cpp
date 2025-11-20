@@ -127,30 +127,39 @@ bool AVLTree::remove(AVLNode *&current, KeyType key) {
 }
 //method to balance the node
 //pretty much copied the chapter 11 zybooks example
-void AVLTree::balanceNode(AVLNode *&node) {
-    //check to make sure there is a node
+AVLTree::AVLNode* AVLTree::balanceNode(AVLNode* node) {
+    //returns nullptr if node does not exist
     if (node == nullptr) {
-        return;
+        return nullptr;
     }
-    //first updates the height of the tree
+    //updates height
     updateTreeHeight(node);
-    if (treeBalance(node) == -2) {
+    //sets balance to one variable so it doesn't keep changing over and over
+    int balance = treeBalance(node);
+    //right balance
+    if (balance == -2) {
+        //right-left double rotation case
         if (treeBalance(node->right) == 1) {
-            //this is apparently the double rotation case according to the zybooks
-            rotateRight(node->right);
+            //rotate right
+            AVLNode* newRight = rotateRight(node->right);
+            AVLTreeSetChild(node, "right", newRight);
         }
-        roatateLeft(node); //single rotation case
+        //rotates left then
+        return roatateLeft(node);
     }
-
-         if (treeBalance(node) == 2) {
-            if (treeBalance(node->left) == -1) {
-                //double rotation case.
-                roatateLeft(node->left);
-            }
-             rotateRight(node); //single rotation case
+    //left balance
+    else if (balance == 2) {
+        //left-right double rotation case
+        if (treeBalance(node->left) == -1) {
+            //rotate left
+            AVLNode* newLeft = roatateLeft(node->left);
+            AVLTreeSetChild(node, "left", newLeft);
         }
+        //rotate right
+        return rotateRight(node);
     }
-
+    return node;
+}
 //this function rotates the node on the tree to the right. Used zybooks example
 AVLTree::AVLNode* AVLTree::rotateRight(AVLNode *&messedUpEvilNode) {
     //if the node does not exist it returns nullptr
@@ -345,8 +354,7 @@ AVLTree::AVLNode* AVLTree::insertPart2(AVLNode* parent, const string& key, size_
     //updates the TreeHeight for the parent
     updateTreeHeight(parent);
     //calls the balanceNode for the parent
-    balanceNode(parent);
-    return parent;
+    return balanceNode(parent);
 }
 
 

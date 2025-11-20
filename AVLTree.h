@@ -69,7 +69,7 @@ public:
     // removeNode contains the logic for actually removing a node based on the numebr of children
     bool removeNode(AVLNode*& current);
     // You will implement this, but it is needed for removeNode()
-    void balanceNode(AVLNode*& node);
+    AVLNode* balanceNode(AVLNode *node);
 
     AVLNode* rotateRight(AVLNode *&node);
 
