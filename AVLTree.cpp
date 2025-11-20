@@ -549,14 +549,29 @@ AVLTree::AVLNode* AVLTree::copyConstucter(const AVLNode* current) {
     }
     //makes a new node with the key and value
     AVLNode* deepCopy = new AVLNode(current->key, current->value);
+    //sets height
+    deepCopy->height = current->height;
     //sets the deep copy left child to the current left child
     deepCopy->left = copyConstucter(current->left);
-
-     //sets the deep copy right child to the current right child
+    //sets left node
+    if (deepCopy->left != nullptr) {
+        //makes a new node with deepCopy->left
+        AVLNode* leftChild = deepCopy->left;
+        //points back to parent node
+        leftChild->parent = deepCopy;
+    }
+    //sets the deep copy right child to the current right child
     deepCopy->right = copyConstucter(current->right);
-    //sets the deep copy height to the current's height
-    deepCopy->height = current->getHeight();
-    //returns the deep copy
+    //sets right node
+    if (deepCopy->right != nullptr) {
+        //makes a new node with deepCopy->right
+        AVLNode* rightChild = deepCopy->right;
+        //points back to parent node
+        rightChild->parent = deepCopy;
+    }
+    //deletes the parent of the root. I think this was causing a crash since there should not be anything
+    //above the root
+    deepCopy->parent = nullptr;
     return deepCopy;
 }
 
