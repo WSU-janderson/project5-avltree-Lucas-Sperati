@@ -1,3 +1,11 @@
+//AVLTree.cpp
+//Project 5
+//CS 3100
+//Lucas Sperati
+//This file implements all the methods that are used for the avlTree
+
+
+
 #include "AVLTree.h"
 
 #include <iostream>
@@ -107,19 +115,19 @@ void AVLTree::balanceNode(AVLNode *&node) {
     if (treeBalance(node) == -2) {
         if (treeBalance(node) == 1) {
             //this is apparently the double rotation case according to the zybooks
-            //todo rotate right
+            rotateRight(node->right);
         }
-        //this is the single rotation case
-        //todo rotate Left
-        else if (treeBalance(node) == 2) {
-            if (treeBalance(node->left) == -1) {
-                //todo rotate left
-            }
-            //todo rotate right
-        }
+        roatateLeft(node); //single rotation case
     }
 
-}
+         if (treeBalance(node) == 2) {
+            if (treeBalance(node->left) == -1) {
+                //double rotation case.
+                roatateLeft(node->left);
+            }
+             rotateRight(node); //single rotation case
+        }
+    }
 
 //this function rotates the node on the tree to the right
 bool AVLTree::rotateRight(AVLNode *&node) {
