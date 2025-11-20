@@ -152,14 +152,14 @@ void AVLTree::balanceNode(AVLNode *&node) {
     }
 
 //this function rotates the node on the tree to the right. Used zybooks example
-bool AVLTree::rotateRight(AVLNode *&messedUpEvilNode) {
-    //if the node does not exist it returns false
+AVLTree::AVLNode* AVLTree::rotateRight(AVLNode *&messedUpEvilNode) {
+    //if the node does not exist it returns nullptr
     if (messedUpEvilNode == nullptr) {
-        return false;
+        return nullptr;
     }
     //if the node does not have a left child then it also returns false since you need a left node to rotate right
     if (messedUpEvilNode->left == nullptr) {
-        return false;
+        return nullptr;
     }
     //node to get the left-right of the node
     AVLNode* leftRightChild = messedUpEvilNode->left->right;
@@ -181,40 +181,39 @@ bool AVLTree::rotateRight(AVLNode *&messedUpEvilNode) {
     //updates height again since the parent of the messedUpEvilNode is the root
     updateTreeHeight(messedUpEvilNode->parent);
     //returns true when successful
-    return true;
+    return leftRightChild;
 }
 //this function rotates the node on the tree to the left
-bool AVLTree::roatateLeft(AVLNode *&messedUpEvilNode) {
+AVLTree::AVLNode* AVLTree::roatateLeft(AVLNode *&messedUpEvilNode) {
     //if the node does not exist it returns false
     if (messedUpEvilNode == nullptr) {
-        return false;
+        return nullptr;
     }
     //if the node does not have a right child then it also returns false since you need a right node to rotate left
     if (messedUpEvilNode->right == nullptr) {
-        return false;
+        return nullptr;
     }
 
-    AVLNode* rightChild = messedUpEvilNode->right;
-    AVLNode* rightLeft = rightChild->left;
+    AVLNode* leftRightChild = messedUpEvilNode->left->right;
 
     //if node has a parent replaces node with its right child
     if (messedUpEvilNode->parent != nullptr) {
-        AVLTreeReplaceChild(messedUpEvilNode->parent, messedUpEvilNode, rightChild);
+        AVLTreeReplaceChild(messedUpEvilNode->parent, messedUpEvilNode, leftRightChild);
     }
     else {
         //node is root
-        root = rightChild;
+        root = leftRightChild;
         root-> parent = nullptr;
     }
     //set right child left child to messedUpEvilNode
-    AVLTreeSetChild(rightChild, "left", messedUpEvilNode);
+    AVLTreeSetChild(leftRightChild, "left", messedUpEvilNode);
     //set right child to rightLeftChild
-    AVLTreeSetChild(messedUpEvilNode, "right", rightLeft);
+    AVLTreeSetChild(messedUpEvilNode, "right", leftRightChild);
     //update heights
     updateTreeHeight(messedUpEvilNode);
-    updateTreeHeight(rightChild);  // new subtree root after rotation
-    //reutrn true once done
-    return true;
+    updateTreeHeight(leftRightChild);  // new subtree root after rotation
+    //return root once done
+    return leftRightChild;
 }
 //this function sets the left and right child based on the parameter used with rotation. Taken from zybooks
 bool AVLTree::AVLTreeSetChild(AVLNode *parent, const std::string &leftOrRight ,AVLNode *child) {
@@ -305,7 +304,7 @@ bool AVLTree::insert(const std::string& key, size_t value) {
     }
     else {
         //calls the other insert function for the recursion stuff
-        insertPart2(root, key, value);
+        root = insertPart2(root, key, value);
     }
     return true;//returns true if gotten to this point since the insert would have been successful.
 }
@@ -576,12 +575,7 @@ AVLTree::AVLNode* AVLTree::copyConstucter(const AVLNode* current) {
     //sets the deep copy left child to the current left child
     deepCopy->left = copyConstucter(current->left);
     //sets left node
-    if (deepCopy->left != nullptr) {
-        //makes a new node with deepCopy->left
-        AVLNode* leftChild = deepCopy->left;
-        //points back to parent node
-        leftChild->parent = deepCopy;
-    }
+
     //sets the deep copy right child to the current right child
     deepCopy->right = copyConstucter(current->right);
     //sets right node
