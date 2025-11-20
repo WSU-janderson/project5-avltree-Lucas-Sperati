@@ -93,19 +93,37 @@ bool AVLTree::remove(AVLNode *&current, KeyType key) {
     }
     //if the key to be removed is less than the current key
     if (key < current->key) {
-        //makes the current key the left child and calls recursively
-        return remove(current->left, key);
+        //variable to compare the return bool from remove.
+        bool removeStatus = remove(current->left, key);
+        //if its true it updates the height and balances
+        if (removeStatus == true) {
+            updateTreeHeight(current);
+            balanceNode(current);
+        }
+        //returns if it was successful
+        return removeStatus;
     }
     //if the key to be removed is greater than the current key
-    if (key > current->key) {
-        //makes the current key the right child and calls recursively
-        return remove(current->right, key);
+    else if (key > current->key) {
+        //variable to keep track of the return bool in remove
+        bool removeStatusRight = remove(current->right, key);
+            //if true updates
+            if (removeStatusRight == true) {
+                updateTreeHeight(current);
+                balanceNode(current);
+            }
+        //then returns if it was true or false
+        return removeStatusRight;
     }
+    //when the key is equal to the current key
     else {
-        //since the key would be found then it calls the removeNode method that was made for us
-        return removeNode(current);
+        //if sucessful returns true
+        if (removeNode(current) == true) {
+            return true;
+        }
+        //otherwise returns false
+        return false;
     }
-
 }
 //method to balance the node
 //pretty much copied the chapter 11 zybooks example
