@@ -20,6 +20,7 @@ public:
     ~AVLTree();
     bool remove(const std::string &key);
     bool insert(const std::string &key, size_t value);
+
     bool contains(const std::string &key) const;
     std::optional<size_t> get(const std::string &key) const;
     size_t &operator[](const std::string &key);
@@ -70,7 +71,7 @@ public:
 
     //---------------------------------------------------------------------------------------------------------
 
-    void insertPart2(AVLNode *parent, AVLNode *newNode);
+    AVLNode* insertPart2(AVLNode* parent, const std::string& key, size_t valueOfKey);
 
     bool contains2(const AVLNode *current, const KeyType &key) const;
 
