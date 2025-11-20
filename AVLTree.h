@@ -105,7 +105,7 @@ public:
 
     size_t size2(AVLNode *node) const;
 
-    size_t getNodeHeight(AVLNode* node) const;
+    int getNodeHeight(AVLNode* node) const;
 
 };
 

@@ -520,8 +520,8 @@ void AVLTree::keys2(AVLNode *current, vector<std::string> &keysVector) const {
 //pretty sure this is just supposed to return the treeHeight
 //TOTALNODES
 size_t AVLTree::size() const {
-    //returns treeHeight which should be the same as the number of key-value pairs
-    return treeHeight;
+    //returns treeHeight which should be the same as the number of key-value pairs by calling size2
+    return size2(root);
 }
 //method for size. I don't think I need a helper method but since the rest of the functions work like that I
 //can't think of another way to do it
@@ -540,7 +540,7 @@ size_t AVLTree::size2(AVLNode* node) const {
 }
 //helper to get the height. If the node is null the height is -1 so that when the height gets calculated it will be 0
 //instead of turning to 0 or something else
-size_t AVLTree::getNodeHeight(AVLNode* node) const{
+int AVLTree::getNodeHeight(AVLNode* node) const{
     if (node == nullptr) {
         return -1;
     }
