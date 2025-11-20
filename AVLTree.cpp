@@ -252,16 +252,17 @@ void AVLTree::findRange2(AVLNode *current, const std::string &lowKey, const std:
         //im pretty sure putting return here just makes the program back out
         return;
     }
-    //if the node's key grater than the low and less than or high, or is the high or low then
-    //it pops the values into the vector
-    if (current->key >= lowKey && current->key <= highKey) {
-        keysVector.push_back(current->key);
-    }
-    //checks the left child
-    else if (current->key > lowKey) {
+
+    //looks through left child. must be before the push_back if statement
+    if (current->key > lowKey) {
         findRange2(current->left, lowKey, highKey, keysVector);
     }
-    //checks the right child
+    //if the node's key is greater than the low and less than or high, or is the high or low then
+    //it pops the values into the vector
+    else if (current->key >= lowKey && current->key <= highKey) {
+        keysVector.push_back(current->key);
+    }
+    //looks through right child
     else if (current->key < highKey) {
         findRange2(current->right, lowKey, highKey, keysVector);
     }
