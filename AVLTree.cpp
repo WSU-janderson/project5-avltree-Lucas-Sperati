@@ -110,10 +110,14 @@ bool AVLTree::remove(AVLNode *&current, KeyType key) {
 //method to balance the node
 //pretty much copied the chapter 11 zybooks example
 void AVLTree::balanceNode(AVLNode *&node) {
+    //check to make sure there is a node
+    if (node == nullptr) {
+        return;
+    }
     //first updates the height of the tree
     updateTreeHeight(node);
     if (treeBalance(node) == -2) {
-        if (treeBalance(node) == 1) {
+        if (treeBalance(node->right) == 1) {
             //this is apparently the double rotation case according to the zybooks
             rotateRight(node->right);
         }
