@@ -171,22 +171,26 @@ bool AVLTree::roatateLeft(AVLNode *&messedUpEvilNode) {
     if (messedUpEvilNode->right == nullptr) {
         return false;
     }
+
+    AVLNode* rightChild = messedUpEvilNode->right;
+    AVLNode* rightLeft = rightChild->left;
+
     //if node has a parent replaces node with its right child
     if (messedUpEvilNode->parent != nullptr) {
-        AVLTreeReplaceChild(messedUpEvilNode->parent, messedUpEvilNode, messedUpEvilNode->right);
+        AVLTreeReplaceChild(messedUpEvilNode->parent, messedUpEvilNode, rightChild);
     }
     else {
         //node is root
-        root = messedUpEvilNode->right;
+        root = rightChild;
         root-> parent = nullptr;
     }
     //set right child left child to messedUpEvilNode
-    AVLTreeSetChild(messedUpEvilNode->right, "left", messedUpEvilNode);
+    AVLTreeSetChild(rightChild, "left", messedUpEvilNode);
     //set right child to rightLeftChild
-    AVLTreeSetChild(messedUpEvilNode, "right", messedUpEvilNode);
+    AVLTreeSetChild(messedUpEvilNode, "right", rightLeft);
     //update heights
     updateTreeHeight(messedUpEvilNode);
-    updateTreeHeight(messedUpEvilNode->parent);  // new subtree root after rotation
+    updateTreeHeight(rightChild);  // new subtree root after rotation
     //reutrn true once done
     return true;
 }
