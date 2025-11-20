@@ -345,6 +345,7 @@ AVLTree::AVLNode* AVLTree::copyConstucter(const AVLNode* current) {
     deepCopy->right = copyConstucter(current->right);
     //sets the deep copy height to the current's height
     //+1 because I think I remember something about the height supposed to be +1?
+    //todo
     deepCopy->height = current->getHeight() + 1;
     //returns the deep copy
     return deepCopy;
@@ -376,9 +377,11 @@ void AVLTree::operator=(const AVLTree& other) {
 //deconstructor
 //goes through all nodes using a postorder traversal and uses delete to release memory taken in each node
 AVLTree::~AVLTree() {
+    //gotta delete the tree first and then reset root and treeHeight
+    deconstructorMethod(root);
     root = nullptr;
     treeHeight = 0;
-    deconstructorMethod(root);
+
 }
 //helper method for the deconstructor. Clion autofilled all of it
 void AVLTree::deconstructorMethod(AVLNode *current) {
