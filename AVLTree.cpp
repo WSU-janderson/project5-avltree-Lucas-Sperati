@@ -129,12 +129,37 @@ void AVLTree::balanceNode(AVLNode *&node) {
         }
     }
 
-//this function rotates the node on the tree to the right
-bool AVLTree::rotateRight(AVLNode *&node) {
-    AVLNode* messedUpEvilNode = node;
-    AVLNode* rightNode = messedUpEvilNode->right;
-    AVLNode* leftNode = messedUpEvilNode->left;
+//this function rotates the node on the tree to the right. Used zybooks example
+bool AVLTree::rotateRight(AVLNode *&messedUpEvilNode) {
+    //if the node does not exist it returns false
+    if (messedUpEvilNode == nullptr) {
+        return false;
+    }
+    //if the node does not have a left child then it also returns false since you need a left node to rotate right
+    if (messedUpEvilNode->left == nullptr) {
+        return false;
+    }
+    //node to get the left-right of the node
+    AVLNode* leftRightChild = messedUpEvilNode->left->right;
 
+    //ff node has a parent then replaces that node with its left child
+    if (messedUpEvilNode->parent != nullptr) {
+        AVLTreeReplaceChild(messedUpEvilNode->parent, messedUpEvilNode, messedUpEvilNode->left);
+    }
+    else {  //node is not root
+        root = messedUpEvilNode->left;
+        root-> parent = nullptr;
+    }
+    //set left child right child to node for rotation
+    AVLTreeSetChild(messedUpEvilNode->left, "right", messedUpEvilNode);
+    //set node left child to leftRightChild
+    AVLTreeSetChild(messedUpEvilNode, "left", leftRightChild);
+    //updates the height
+    updateTreeHeight(messedUpEvilNode);
+    //updates height again since the parent of the messedUpEvilNode is the root
+    updateTreeHeight(messedUpEvilNode->parent);
+    //returns true when successful
+    return true;
 }
 //this function rotates the node on the tree to the left
 bool AVLTree::roatateLeft(AVLNode *&node) {
