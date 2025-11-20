@@ -137,6 +137,8 @@ AVLTree::AVLNode* AVLTree::insertPart2(AVLNode* parent, const string& key, size_
     }
 
     //todo update height and balance parent node
+
+    return parent;
 }
 
 
