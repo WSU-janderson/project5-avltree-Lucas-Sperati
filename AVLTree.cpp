@@ -1,5 +1,6 @@
 #include "AVLTree.h"
 
+#include <iostream>
 #include <optional>
 #include <string>
 #include <vector>
@@ -386,5 +387,21 @@ AVLTree::AVLTree() {
     root = nullptr;
     treeHeight = 0;
 }
-
-//todo don't forget the friend method again, dumb fuck
+//method to print out the tree
+std::ostream &operator<<(std::ostream &os, const AVLTree &AVLTree) {
+    //calls printMethod for recursion
+    AVLTree.printMethod(os, AVLTree.root);
+    return os;
+}
+//helper method for operator<<
+void AVLTree::printMethod( std::ostream &os, AVLNode *current) const {
+    if (current == nullptr) {
+        return;
+    }
+    //prints out the right subtree because of the right-child-first in-order traversal
+    printMethod(os, current->right);
+    //prints the key and value, clion generated this line
+    std::cout << "{ " << current->key << ", " << current->value << " }" << std::endl;
+    //prints left tree
+    printMethod(os, current->left);
+}

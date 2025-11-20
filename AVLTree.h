@@ -92,10 +92,10 @@ public:
 
     AVLTree();
 
-    //prints out the tree
-    friend std::ostream &operator<<(std::ostream &os, const AVLTree &avlTree) {
+    void printMethod(std::ostream &os, AVLNode *current) const;
 
-    }
+    //prints out the tree
+    friend std::ostream &operator<<(std::ostream &os, const AVLTree &avlTree);
 };
 
 #endif //AVLTREE_H
