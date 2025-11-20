@@ -162,11 +162,33 @@ bool AVLTree::rotateRight(AVLNode *&messedUpEvilNode) {
     return true;
 }
 //this function rotates the node on the tree to the left
-bool AVLTree::roatateLeft(AVLNode *&node) {
-    AVLNode* messedUpEvilNode = node;
-    AVLNode* rightNode = messedUpEvilNode->right;
-    AVLNode* leftNode = messedUpEvilNode->left;
-
+bool AVLTree::roatateLeft(AVLNode *&messedUpEvilNode) {
+    //if the node does not exist it returns false
+    if (messedUpEvilNode == nullptr) {
+        return false;
+    }
+    //if the node does not have a right child then it also returns false since you need a right node to rotate left
+    if (messedUpEvilNode->right == nullptr) {
+        return false;
+    }
+    //if node has a parent replaces node with its right child
+    if (messedUpEvilNode->parent != nullptr) {
+        AVLTreeReplaceChild(messedUpEvilNode->parent, messedUpEvilNode, messedUpEvilNode->right);
+    }
+    else {
+        //node is root
+        root = messedUpEvilNode->right;
+        root-> parent = nullptr;
+    }
+    //set right child left child to messedUpEvilNode
+    AVLTreeSetChild(messedUpEvilNode->right, "left", messedUpEvilNode);
+    //set right child to rightLeftChild
+    AVLTreeSetChild(messedUpEvilNode, "right", messedUpEvilNode);
+    //update heights
+    updateTreeHeight(messedUpEvilNode);
+    updateTreeHeight(messedUpEvilNode->parent);  // new subtree root after rotation
+    //reutrn true once done
+    return true;
 }
 //this function sets the left and right child based on the parameter used with rotation. Taken from zybooks
 bool AVLTree::AVLTreeSetChild(AVLNode *parent, const std::string &leftOrRight ,AVLNode *child) {
