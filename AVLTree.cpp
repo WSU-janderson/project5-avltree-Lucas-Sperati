@@ -537,11 +537,15 @@ size_t AVLTree::size2(AVLNode* node) const {
     size_t totalSize = leftNode + rightNode + 1;
     //returns total nodes
     return totalSize;
-
 }
-
-
-
+//helper to get the height. If the node is null the height is -1 so that when the height gets calculated it will be 0
+//instead of turning to 0 or something else
+int AVLTree::getNodeHeight (AVLNode* node) {
+    if (node == nullptr) {
+        return -1;
+    }
+    return node->height;
+}
 
 //returns height of the AVL tree
 //time complexity should be O(1)
