@@ -141,7 +141,13 @@ bool AVLTree::AVLTreeSetChild(AVLNode *parent, const std::string &leftOrRight ,A
 }
 //this function replaces the child node in rotation. Taken from zybooks
 bool AVLTree::AVLTreeReplaceChild(AVLNode *parent, AVLNode *currentChild, AVLNode *newChild) {
-
+    if (parent->left == currentChild) {
+        return AVLTreeSetChild(parent, "left", newChild);
+    }
+    else if (parent->right == currentChild) {
+        return AVLTreeSetChild(parent, "right", newChild);
+    }
+    return false;
 }
 
 
