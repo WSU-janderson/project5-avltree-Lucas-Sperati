@@ -24,7 +24,7 @@ public:
     bool contains(const std::string &key) const;
     std::optional<size_t> get(const std::string &key) const;
     size_t &operator[](const std::string &key);
-    vector<std::string> findRange(const std::string &lowKey, const std::string &highKey) const;
+    vector<size_t> findRange(const std::string &lowKey, const std::string &highKey) const;
     std::vector<std::string> keys() const;
     size_t size() const;
     size_t getHeight() const;
@@ -79,7 +79,7 @@ public:
 
     size_t &operator2(AVLNode *&current, KeyType key);
 
-    void findRange2(AVLNode *current, const std::string &lowKey, const std::string &highKey, vector<string> &keysVector) const;
+    void findRange2(AVLNode *current, const std::string &lowKey, const std::string &highKey, vector<size_t> &keysVector) const;
 
     void keys2(AVLNode *current, vector<string> &keysVector) const;
 

@@ -13,6 +13,7 @@ using namespace std;
 
 int main() {
     AVLTree tree;
+ cout << "insert test" <<endl;
     bool insertResult;
     insertResult = tree.insert("F", 'F');
     insertResult = tree.insert("F", 'F'); // false, no duplicates allowed
@@ -42,17 +43,20 @@ int main() {
     cout << endl << endl;
     cout << tree << endl;
 
+ cout << "size and get height" <<endl;
     // size and getHeight
     cout << "tree size: " << tree.size() << endl; // 10
     cout << "tree height: " << tree.getHeight() << endl; // 3
     cout << endl;
 
+ cout << "contains" <<endl;
    // contains
    bool containsResult;
    containsResult = tree.contains("A"); // true
    containsResult = tree.contains("N"); // false
 
    // get
+ cout << "get test" <<endl;
    optional<int> getResult;
 
    getResult = tree.get("A"); // 65
@@ -66,18 +70,21 @@ int main() {
    cout << endl;
 
     //findRange
-   vector<int> rangeTest = tree.findRange("D", "W");
+   cout << "range test" <<endl;
+   vector<size_t> rangeTest = tree.findRange("D", "W");
     //70 68 82 75 77 86
    for (auto val: rangeTest) {
        cout << val << " ";
    }
    cout << endl << endl;
 
+    cout << "operator test" <<endl;
    // operator[]
    tree["A"] = 108;
    cout << tree << endl;
    cout << endl;
 
+ cout << "remove test" <<endl;
    // remove
    bool removeResult;
    removeResult= tree.remove("A"); // "A" is a leaf

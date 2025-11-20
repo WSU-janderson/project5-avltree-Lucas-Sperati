@@ -232,21 +232,21 @@ size_t &AVLTree::operator2(AVLNode *&current, KeyType key) {
     }
 }
 
-//todo recursion
+
 //will return a  of size_t containing all the values associated with keys >= lowKey and keys
 //<= highKey. For each key found in the given range, there will be one value in the vector. If no matching
 //key-value pairs are found the function should return an empty vector.
-vector<std::string> AVLTree::findRange(const std::string& lowKey, const std::string& highKey) const {
+std::vector<size_t> AVLTree::findRange(const std::string& lowKey, const std::string& highKey) const {
     //makes the vector for the keys
     //should technically be called valueVector or something like that
-    vector<string> keysVector;
+    vector<size_t> keysVector;
     //calls the other find range method for with the root, keys, and new vector
     findRange2(root, lowKey, highKey, keysVector);
     return keysVector;
 }
 //recursive method for findRange, returns the keysVector
 void AVLTree::findRange2(AVLNode *current, const std::string &lowKey, const std::string &highKey,
-    vector<string> &keysVector) const{
+    vector<size_t> &keysVector) const{
     //if the current is null then it returns back to findRange without adding anything to the vector
     if (current == nullptr) {
         //im pretty sure putting return here just makes the program back out
@@ -259,17 +259,17 @@ void AVLTree::findRange2(AVLNode *current, const std::string &lowKey, const std:
     }
     //if the node's key is greater than the low and less than or high, or is the high or low then
     //it pops the values into the vector
-    else if (current->key >= lowKey && current->key <= highKey) {
-        keysVector.push_back(current->key);
+    if (current->key >= lowKey && current->key <= highKey) {
+        keysVector.push_back(current->value);
     }
     //looks through right child
-    else if (current->key < highKey) {
+    if (current->key < highKey) {
         findRange2(current->right, lowKey, highKey, keysVector);
     }
 }
 
 
-//todo recursion
+
 //returns a vector with all the keys currently in the tree. The length of the vector should be the same
 //as the size of the tree
 //set up pretty much the same as findRange
