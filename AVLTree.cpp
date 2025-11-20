@@ -137,7 +137,21 @@ bool AVLTree::roatateLeft(AVLNode *&node) {
 }
 //this function sets the left and right child based on the parameter used with rotation. Taken from zybooks
 bool AVLTree::AVLTreeSetChild(AVLNode *parent, const std::string &leftOrRight ,AVLNode *child) {
+    if (leftOrRight != "left" && leftOrRight != "right") {
+        return false;
+    }
+    if (leftOrRight == "right") {
+        parent->right = child;
+    }
+    else {
+        parent->left = child;
+    }
 
+    if (child != nullptr) {
+        //made a parent pointer in the .h file for AVLNode
+        child->parent = parent;
+    }
+    return true;
 }
 //this function replaces the child node in rotation. Taken from zybooks
 bool AVLTree::AVLTreeReplaceChild(AVLNode *parent, AVLNode *currentChild, AVLNode *newChild) {

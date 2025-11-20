@@ -42,6 +42,7 @@ protected:
         KeyType key;
         ValueType value;
         size_t height;
+        AVLNode* parent;
 
         AVLNode* left;
         AVLNode* right;
