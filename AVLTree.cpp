@@ -5,9 +5,17 @@
 #include <string>
 #include <vector>
 
-
+//function to check the number of children in the node. If the left and right are not null then children increases
+//by one
 size_t AVLTree::AVLNode::numChildren() const {
-    return 0;
+    size_t children = 0;
+    if (left != nullptr) {
+        children = children + 1;
+    }
+    else if (right != nullptr) {
+        children = children + 1;
+    }
+    return children;
 }
 //for the node to be a leaf the left and right need to be null
 //checks if lef and right are null. True if the are false otherwise
@@ -25,13 +33,14 @@ size_t AVLTree::AVLNode::getHeight() const {
     return height;
 }
 
+//function given to us to delete the node
 bool AVLTree::removeNode(AVLNode*& current){
     if (!current) {
         return false;
     }
 
     AVLNode* toDelete = current;
-    auto nChildren = current->numChildren();
+    auto nChildren = current->numChildren(); //idk what this does
     if (current->isLeaf()) {
         // case 1 we can delete the node
         current = nullptr;
