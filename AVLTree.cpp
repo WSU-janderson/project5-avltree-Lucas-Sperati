@@ -241,7 +241,7 @@ void AVLTree::updateTreeHeight(AVLNode *&node) {
 }
 
 //another method to get the balance of the tree for balanceNode. similar to update tree height
-size_t AVLTree::treeBalance(AVLNode *node) {
+int AVLTree::treeBalance(AVLNode *node) {
     //sets the left and right height variable to -1 because the zybooks says so and I have no idea why
     int leftHeight = -1;
     int rightHeight = -1;
@@ -346,6 +346,8 @@ bool AVLTree::contains2(const AVLNode* current, const KeyType& key) const {
     else if (key > current->key) {
         return contains2(current->right, key);
     }
+    //returns false if gotten to this point
+    return false;
 }
 
 

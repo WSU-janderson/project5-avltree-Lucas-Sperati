@@ -100,7 +100,7 @@ public:
 
     void updateTreeHeight(AVLNode *&current);
 
-    size_t treeBalance(AVLNode *node);
+    int treeBalance(AVLNode *node);
 };
 
 #endif //AVLTREE_H
