@@ -100,11 +100,14 @@ bool AVLTree::remove(AVLNode *&current, KeyType key) {
 
 }
 //method to balance the node
+//pretty much copied the chapter 11 zybooks example
 void AVLTree::balanceNode(AVLNode *&node) {
     //first updates the height of the tree
     updateTreeHeight(node);
 
+
 }
+
 
 //https://learn.zybooks.com/zybook/WRIGHTCS3100_5100AndersonFall2025/chapter/11/section/2
 //extra method to update the height for balance node
@@ -120,6 +123,24 @@ void AVLTree::updateTreeHeight(AVLNode *&node) {
     }
     node->height = max(leftHeight, rightHeight) + 1;
 
+}
+
+//another method to get the balance of the tree for balanceNode. similar to update tree height
+size_t AVLTree::treeBalance(AVLNode *node) {
+    //sets the left and right height variable to -1 because the zybooks says so and I have no idea why
+    int leftHeight = -1;
+    int rightHeight = -1;
+    //if the node has a left child you get that height
+    if (node->left != nullptr) {
+        leftHeight = node->left->height;
+    }
+    //if the node has a right child you get that height
+    if (node->right != nullptr) {
+        rightHeight = node->right->height;
+    }
+    //returns the balanceHeight which is the left height - the right height
+    size_t balanceHeight = leftHeight - rightHeight;
+    return balanceHeight;
 }
 //---------------------------------------------------------------
 
