@@ -294,11 +294,16 @@ void AVLTree::keys2(AVLNode *current, vector<std::string> &keysVector) const {
     if (current == nullptr) {
         return;
     }
-    //todo this shit 100% don't work, fuck with the order of these
+
     //goes left, gets that node, if not current, goes right, goes until one passes and pops key to that vector
+    //https://learn.zybooks.com/zybook/WRIGHTCS3100_5100AndersonFall2025/chapter/10/section/7?content_resource_id=91821327
+    //supposed to use a postorder traversal, not an inorder. I think???????
+    //goes left
     keys2(current->left, keysVector);
-    keys2(current->right, keysVector);
+    //pushed back so it gets listen before the right subtrees
     keysVector.push_back(current->key);
+    //then right gets thrown on
+    keys2(current->right, keysVector);
 }
 
 
