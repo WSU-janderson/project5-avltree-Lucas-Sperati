@@ -101,7 +101,7 @@ int main() {
    cout << endl << endl;
    cout << tree << endl;
 
- cout << "remove v,x,z" <<endl;
+ cout << "remove test" <<endl;
    removeResult = tree.remove("V");
    removeResult = tree.remove("X");
    removeResult = tree.remove("Z"); // double rotate right
