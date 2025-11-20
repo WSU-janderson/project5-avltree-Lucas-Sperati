@@ -415,6 +415,7 @@ std::optional<size_t> AVLTree::get2(AVLNode *current, KeyType key) const {
     else if (key > current->key) {
         return get2(current->right, key);
     }
+    return std::nullopt;
 }
 
 
@@ -517,11 +518,28 @@ void AVLTree::keys2(AVLNode *current, vector<std::string> &keysVector) const {
 //returns how many key-value pairs are in the tree
 //time complexity should be O(1)
 //pretty sure this is just supposed to return the treeHeight
-//random side tangent because my head hurts, this class is hard and I should really pay attention more lol
+//TOTALNODES
 size_t AVLTree::size() const {
     //returns treeHeight which should be the same as the number of key-value pairs
     return treeHeight;
 }
+//method for size. I don't think I need a helper method but since the rest of the functions work like that I
+//can't think of another way to do it
+size_t AVLTree::size2(AVLNode* node) const {
+    if (node == nullptr){
+    return 0;
+    }
+    //left subtree nodes
+    size_t leftNode = size2(node->left);
+    //right subtree nodes
+    size_t rightNode = size2(node->right);
+    //gets the count of the left and right nodes, plus the current node (+1)
+    size_t totalSize = leftNode + rightNode + 1;
+    //returns total nodes
+    return totalSize;
+
+}
+
 
 
 

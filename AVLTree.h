@@ -27,6 +27,7 @@ public:
     vector<size_t> findRange(const std::string &lowKey, const std::string &highKey) const;
     std::vector<std::string> keys() const;
     size_t size() const;
+
     size_t getHeight() const;
     AVLTree(const AVLTree &other);
     void operator=(const AVLTree &other);
@@ -101,6 +102,8 @@ public:
     void updateTreeHeight(AVLNode *&current);
 
     int treeBalance(AVLNode *node);
+
+    size_t size2(AVLNode *node) const;
 };
 
 #endif //AVLTREE_H
