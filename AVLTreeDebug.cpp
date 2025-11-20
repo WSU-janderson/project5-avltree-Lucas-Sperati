@@ -91,14 +91,17 @@ int main() {
    cout << endl << endl;
    cout << tree << endl;
 
+ cout << "remove c" <<endl;
    removeResult = tree.remove("C"); // "C" has one child, single rotate left
    cout << endl << endl;
    cout << tree << endl;
 
+    cout << "remove f" <<endl;
    removeResult = tree.remove("F"); // "F" has two children
    cout << endl << endl;
    cout << tree << endl;
 
+ cout << "remove v,x,z" <<endl;
    removeResult = tree.remove("V");
    removeResult = tree.remove("X");
    removeResult = tree.remove("Z"); // double rotate right

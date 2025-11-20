@@ -88,6 +88,8 @@ public:
     void deconstructorMethod(AVLNode *current);
 
     void printMethod(std::ostream &os, AVLNode *current) const;
+
+    void updateTreeHeight(AVLNode *&current);
 };
 
 #endif //AVLTREE_H

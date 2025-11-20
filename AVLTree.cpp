@@ -99,11 +99,28 @@ bool AVLTree::remove(AVLNode *&current, KeyType key) {
     }
 
 }
-
+//method to balance the node
 void AVLTree::balanceNode(AVLNode *&node) {
+    //first updates the height of the tree
+    updateTreeHeight(node);
 
 }
 
+//https://learn.zybooks.com/zybook/WRIGHTCS3100_5100AndersonFall2025/chapter/11/section/2
+//extra method to update the height for balance node
+//literally stole this entire method from the zybooks line by line
+void AVLTree::updateTreeHeight(AVLNode *&node) {
+    int leftHeight = -1;
+    int rightHeight = -1;
+    if (node->left != nullptr) {
+        leftHeight = node->left->height;
+    }
+    if (node->right != nullptr) {
+        rightHeight = node->right->height;
+    }
+    node->height = max(leftHeight, rightHeight) + 1;
+
+}
 //---------------------------------------------------------------
 
 //todo recursion
@@ -152,7 +169,8 @@ AVLTree::AVLNode* AVLTree::insertPart2(AVLNode* parent, const string& key, size_
     }
 
     //todo update height and balance parent node
-
+    //calls the balanceNode method for the parent node
+    balanceNode(parent);
     return parent;
 }
 
