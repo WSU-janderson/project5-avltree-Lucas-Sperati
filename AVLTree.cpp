@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+
 size_t AVLTree::AVLNode::numChildren() const {
     return 0;
 }
@@ -241,13 +242,13 @@ size_t &AVLTree::operator2(AVLNode *&current, KeyType key) {
 }
 
 //todo recursion
-//will return a std::vector of size_t containing all the values associated with keys >= lowKey and keys
+//will return a  of size_t containing all the values associated with keys >= lowKey and keys
 //<= highKey. For each key found in the given range, there will be one value in the vector. If no matching
 //key-value pairs are found the function should return an empty vector.
 vector<std::string> AVLTree::findRange(const std::string& lowKey, const std::string& highKey) const {
     //makes the vector for the keys
     //should technically be called valueVector or something like that
-    std::vector <std::string> keysVector;
+    vector<string> keysVector;
     //calls the other find range method for with the root, keys, and new vector
     findRange2(root, lowKey, highKey, keysVector);
     return keysVector;
@@ -281,14 +282,14 @@ void AVLTree::findRange2(AVLNode *current, const std::string &lowKey, const std:
 //as the size of the tree
 //set up pretty much the same as findRange
 std::vector<std::string> AVLTree::keys() const {
-    std::vector<std::string> actualKeyVector;
+    vector<string> actualKeyVector;
     keys2(root, actualKeyVector);
     return actualKeyVector;
 }
 //recursive method for keys
 //MAKE SURE THE HELPERS ARE CONST
 //also assuming this can be empty if there is nothing in the tree(?)
-void AVLTree::keys2(AVLNode *current, vector<string> &keysVector) const {
+void AVLTree::keys2(AVLNode *current, vector<std::string> &keysVector) const {
     //if the current is nullptr then it returns the vector, again im assuming this can be empty like findRange
     if (current == nullptr) {
         return;
