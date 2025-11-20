@@ -189,8 +189,8 @@ AVLTree::AVLNode* AVLTree::rotateRight(AVLNode *&messedUpEvilNode) {
     updateTreeHeight(messedUpEvilNode);
     //updates height again since the parent of the messedUpEvilNode is the root
     updateTreeHeight(messedUpEvilNode->parent);
-    //returns the new node
-    return messedUpEvilNode->parent;
+    //returns true when successful
+    return leftRightChild;
 }
 //this function rotates the node on the tree to the left
 AVLTree::AVLNode* AVLTree::roatateLeft(AVLNode *&messedUpEvilNode) {
@@ -202,28 +202,27 @@ AVLTree::AVLNode* AVLTree::roatateLeft(AVLNode *&messedUpEvilNode) {
     if (messedUpEvilNode->right == nullptr) {
         return nullptr;
     }
-    //need two noded to check the left and right childs
-    AVLNode* rightChild = messedUpEvilNode->right;
-    AVLNode* leftChild = rightChild->left;
+
+    AVLNode* leftRightChild = messedUpEvilNode->left->right;
 
     //if node has a parent replaces node with its right child
     if (messedUpEvilNode->parent != nullptr) {
-        AVLTreeReplaceChild(messedUpEvilNode->parent, messedUpEvilNode, rightChild);
+        AVLTreeReplaceChild(messedUpEvilNode->parent, messedUpEvilNode, leftRightChild);
     }
     else {
         //node is root
-        root = rightChild;
+        root = leftRightChild;
         root-> parent = nullptr;
     }
     //set right child left child to messedUpEvilNode
-    AVLTreeSetChild(rightChild, "left", messedUpEvilNode);
-    //set right child to leftChild
-    AVLTreeSetChild(messedUpEvilNode, "right", leftChild);
+    AVLTreeSetChild(leftRightChild, "left", messedUpEvilNode);
+    //set right child to rightLeftChild
+    AVLTreeSetChild(messedUpEvilNode, "right", leftRightChild);
     //update heights
     updateTreeHeight(messedUpEvilNode);
-    updateTreeHeight(rightChild);  // new subtree root after rotation
+    updateTreeHeight(leftRightChild);  // new subtree root after rotation
     //return root once done
-    return rightChild;
+    return leftRightChild;
 }
 //this function sets the left and right child based on the parameter used with rotation. Taken from zybooks
 bool AVLTree::AVLTreeSetChild(AVLNode *parent, const std::string &leftOrRight ,AVLNode *child) {
@@ -295,6 +294,9 @@ int AVLTree::treeBalance(AVLNode *node) {
 //No duplicates. Should return true if insertion was successful and false if not
 //Time complexity must be 0(log2 n)
 bool AVLTree::insert(const std::string& key, size_t value) {
+    //makes a new node with the key and value
+    AVLNode* newNode = new AVLNode(key, value);
+
     //if the key already exists then the function returns false
     if (contains(key) == true) {
         return false;
@@ -302,7 +304,7 @@ bool AVLTree::insert(const std::string& key, size_t value) {
 
     //if the root is nullptr then the node is set to the root
     if (root == nullptr) {
-        root = new AVLNode(key, value);
+        root = newNode;
         //sets the parent to null since the new node would not have a parent
         root->parent = nullptr;
         //sets height to 0 since there is only one node
@@ -581,9 +583,6 @@ AVLTree::AVLNode* AVLTree::copyConstucter(const AVLNode* current) {
     //sets the deep copy left child to the current left child
     deepCopy->left = copyConstucter(current->left);
     //sets left node
-    if (deepCopy->left != nullptr) {
-        deepCopy->left->parent = deepCopy;
-    }
 
     //sets the deep copy right child to the current right child
     deepCopy->right = copyConstucter(current->right);
@@ -594,6 +593,9 @@ AVLTree::AVLNode* AVLTree::copyConstucter(const AVLNode* current) {
         //points back to parent node
         rightChild->parent = deepCopy;
     }
+    //deletes the parent of the root. I think this was causing a crash since there should not be anything
+    //above the root
+    deepCopy->parent = nullptr;
     return deepCopy;
 }
 
