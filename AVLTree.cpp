@@ -377,7 +377,6 @@ void AVLTree::deconstructorMethod(AVLNode *current) {
     }
     //deletes left child
     deconstructorMethod(current->left);
-    delete current;
     //deletes right child
     deconstructorMethod(current->right);
     delete current;
