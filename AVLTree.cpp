@@ -293,7 +293,7 @@ AVLTree::AVLNode* AVLTree::insertPart2(AVLNode* parent, const string& key, size_
     //if the node is null then it returns what was inserted as that node
     if (parent == nullptr) {
         return new AVLNode(key, valueOfKey);
-        //todo update height
+        updateTreeHeight(parent);
     }
     //if the parent is the same as the key then they are the same and duplicates are not allowed
     if (key == parent->key) {
@@ -311,6 +311,7 @@ AVLTree::AVLNode* AVLTree::insertPart2(AVLNode* parent, const string& key, size_
     //todo update height and balance parent node
     //calls the balanceNode method for the parent node
     balanceNode(parent);
+    updateTreeHeight(parent);
     return parent;
 }
 
