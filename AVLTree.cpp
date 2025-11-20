@@ -321,6 +321,10 @@ size_t AVLTree::size() const {
 //returns height of the AVL tree
 //time complexity should be O(1)
 size_t AVLTree::getHeight() const {
+    //because of a crash I made a check that if root does not exist then height must be 0
+    if (root == nullptr) {
+        return 0;
+    }
     //calls the other node getHight and returns the height in the node class
     return root->getHeight();
 }
