@@ -26,15 +26,15 @@ int main() {
     insertResult = tree.insert("A", 'A'); // single rotate right
     cout << endl << endl;
     cout << tree << endl;
-
+    cout << "insert d,d" <<endl;
     insertResult = tree.insert("D", 'D'); // double rotate right
     cout << endl << endl;
     cout << tree << endl;
-
+    cout << "insert r,r" <<endl;
     insertResult = tree.insert("R", 'R'); // double rotate left
     cout << endl << endl;
     cout << tree << endl;
-
+    cout << "insert more" <<endl;
     insertResult = tree.insert("V", 'V');
     insertResult = tree.insert("A", 'A'); // false, duplicate
     insertResult = tree.insert("Z", 'Z');
