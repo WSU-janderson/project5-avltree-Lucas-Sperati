@@ -336,12 +336,18 @@ AVLTree::AVLNode* AVLTree::copyConstucter(const AVLNode* current) {
     if (current == nullptr) {
         return nullptr;
     }
-    //inserts the current key and value into the deep copy
-    insert(current->key, current->value);
-    //runs for left children
-    copyConstucter(current->left);
-    //runs for right children
-    copyConstucter(current->right);
+    //makes a new node with the key and value
+    AVLNode* deepCopy = new AVLNode(current->key, current->value);
+    //sets the deep copy left child to the current left child
+    deepCopy->left = copyConstucter(current->left);
+
+     //sets the deep copy right child to the current right child
+    deepCopy->right = copyConstucter(current->right);
+    //sets the deep copy height to the current's height
+    //+1 because I think I remember something about the height supposed to be +1?
+    deepCopy->height = current->getHeight() + 1;
+    //returns the deep copy
+    return deepCopy;
 }
 
 
