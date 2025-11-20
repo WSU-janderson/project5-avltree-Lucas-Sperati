@@ -540,7 +540,7 @@ size_t AVLTree::size2(AVLNode* node) const {
 }
 //helper to get the height. If the node is null the height is -1 so that when the height gets calculated it will be 0
 //instead of turning to 0 or something else
-int AVLTree::getNodeHeight (AVLNode* node) {
+size_t AVLTree::getNodeHeight (AVLNode* node) const{
     if (node == nullptr) {
         return -1;
     }

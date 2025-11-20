@@ -62,6 +62,7 @@ public:
     AVLNode* root;
     size_t treeHeight;
 
+
     /* Helper methods for remove */
     // this overloaded remove will do the recursion to remove the node
     bool remove(AVLNode*& current, KeyType key);
@@ -102,10 +103,9 @@ public:
 
     int treeBalance(AVLNode *node);
 
-    int getNodeHeight(AVLNode *node);
+    size_t size2(AVLNode *node) const;
 
-    int getNodeHeight(AVLNode* node) const;
-
+    size_t getNodeHeight(AVLNode* node) const;
 
 };
 
