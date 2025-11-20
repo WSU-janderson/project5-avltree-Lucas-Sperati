@@ -339,9 +339,7 @@ AVLTree::AVLNode* AVLTree::copyConstucter(const AVLNode* current) {
      //sets the deep copy right child to the current right child
     deepCopy->right = copyConstucter(current->right);
     //sets the deep copy height to the current's height
-    //+1 because I think I remember something about the height supposed to be +1?
-    //todo
-    deepCopy->height = current->getHeight() + 1;
+    deepCopy->height = current->getHeight();
     //returns the deep copy
     return deepCopy;
 }
