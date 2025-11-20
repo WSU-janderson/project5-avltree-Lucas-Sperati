@@ -69,6 +69,14 @@ public:
     // You will implement this, but it is needed for removeNode()
     void balanceNode(AVLNode*& node);
 
+    bool rotateRight(AVLNode *&node);
+
+    bool roatateLeft(AVLNode *&node);
+
+    bool AVLTreeSetChild(AVLNode *parent, const std::string &leftOrRight, AVLNode *child);
+
+    bool AVLTreeReplaceChild(AVLNode *parent, AVLNode *currentChild, AVLNode *newChild);
+
     //---------------------------------------------------------------------------------------------------------
 
     AVLNode* insertPart2(AVLNode* parent, const std::string& key, size_t valueOfKey);

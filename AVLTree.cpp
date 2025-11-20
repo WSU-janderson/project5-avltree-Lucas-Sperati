@@ -121,6 +121,29 @@ void AVLTree::balanceNode(AVLNode *&node) {
 
 }
 
+//this function rotates the node on the tree to the right
+bool AVLTree::rotateRight(AVLNode *&node) {
+    AVLNode* messedUpEvilNode = node;
+    AVLNode* rightNode = messedUpEvilNode->right;
+    AVLNode* leftNode = messedUpEvilNode->left;
+
+}
+//this function rotates the node on the tree to the left
+bool AVLTree::roatateLeft(AVLNode *&node) {
+    AVLNode* messedUpEvilNode = node;
+    AVLNode* rightNode = messedUpEvilNode->right;
+    AVLNode* leftNode = messedUpEvilNode->left;
+
+}
+//this function sets the left and right child based on the parameter used with rotation. Taken from zybooks
+bool AVLTree::AVLTreeSetChild(AVLNode *parent, const std::string &leftOrRight ,AVLNode *child) {
+
+}
+//this function replaces the child node in rotation. Taken from zybooks
+bool AVLTree::AVLTreeReplaceChild(AVLNode *parent, AVLNode *currentChild, AVLNode *newChild) {
+
+}
+
 
 //https://learn.zybooks.com/zybook/WRIGHTCS3100_5100AndersonFall2025/chapter/11/section/2
 //extra method to update the height for balance node
