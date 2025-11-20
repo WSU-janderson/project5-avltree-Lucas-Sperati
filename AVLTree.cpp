@@ -9,9 +9,15 @@
 size_t AVLTree::AVLNode::numChildren() const {
     return 0;
 }
-
+//for the node to be a leaf the left and right need to be null
+//checks if lef and right are null. True if the are false otherwise
 bool AVLTree::AVLNode::isLeaf() const {
-    return false;
+    if (left == nullptr && right == nullptr) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 //made this return height instead of 0
@@ -62,7 +68,7 @@ bool AVLTree::removeNode(AVLNode*& current){
 
     return true;
 }
-
+//helper remove method
 bool AVLTree::remove(AVLNode *&current, KeyType key) {
     //if the current node is nullptr then it returns false since the key doesn't exist
     if (current == nullptr) {
@@ -236,6 +242,10 @@ size_t &AVLTree::operator2(AVLNode *&current, KeyType key) {
 //will return a  of size_t containing all the values associated with keys >= lowKey and keys
 //<= highKey. For each key found in the given range, there will be one value in the vector. If no matching
 //key-value pairs are found the function should return an empty vector.
+
+//I changed the type that findRange is to a size_t instead of a string. I also changed the call in debug to a size_t.
+//The program wants findRange to return values, which should be ints, but the instructions also say it should return
+//the vector of size_t. I don't know how to move ints, strings, and size_ts between each other so i made everything a size_t
 std::vector<size_t> AVLTree::findRange(const std::string& lowKey, const std::string& highKey) const {
     //makes the vector for the keys
     //should technically be called valueVector or something like that
