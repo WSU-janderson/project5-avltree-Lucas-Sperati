@@ -138,28 +138,33 @@ AVLTree::AVLNode* AVLTree::balanceNode(AVLNode* node) {
     int balance = treeBalance(node);
     //right balance
     if (balance == -2) {
-        //right-left double rotation case
+        //right-left double rotation
         if (treeBalance(node->right) == 1) {
-            //rotate right
-            AVLNode* newRight = rotateRight(node->right);
-            AVLTreeSetChild(node, "right", newRight);
+            //rotate right for the first rotation of double rotation
+            node->right = rotateRight(node->right);
         }
         //rotates left then
-        return roatateLeft(node);
+        AVLNode* newRoot = roatateLeft(node);
+        return newRoot;
     }
     //left balance
     else if (balance == 2) {
-        //left-right double rotation case
+        //left-right double rotation
+        //should be -1 because of left(i think)
         if (treeBalance(node->left) == -1) {
-            //rotate left
-            AVLNode* newLeft = roatateLeft(node->left);
-            AVLTreeSetChild(node, "left", newLeft);
+            //rotate left for the first rotation of double rotation
+            node->left = roatateLeft(node->left);
+            if (node->left != nullptr) {
+                node->left->parent = node;
+            }
         }
-        //rotate right
-        return rotateRight(node);
+        //rotate right then
+        AVLNode* newRoot = rotateRight(node);
+        return newRoot;
     }
     return node;
 }
+
 //this function rotates the node on the tree to the right. Used zybooks example
 AVLTree::AVLNode* AVLTree::rotateRight(AVLNode *&messedUpEvilNode) {
     //if the node does not exist it returns nullptr
