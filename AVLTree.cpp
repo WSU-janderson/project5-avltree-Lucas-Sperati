@@ -212,27 +212,30 @@ AVLTree::AVLNode* AVLTree::roatateLeft(AVLNode *&messedUpEvilNode) {
     if (messedUpEvilNode->right == nullptr) {
         return nullptr;
     }
+    //nodes
+    AVLNode* rightChild = messedUpEvilNode->right;
+    AVLNode* leftChild = rightChild->left;
+    //rotation. Pretty much replaces the messedUpEvilNode with its right child and makes messedUpEvilNode its
+    //left child.
+    rightChild->left = messedUpEvilNode;
+    messedUpEvilNode->right = leftChild;
 
-    AVLNode* leftRightChild = messedUpEvilNode->left->right;
-
-    //if node has a parent replaces node with its right child
-    if (messedUpEvilNode->parent != nullptr) {
-        AVLTreeReplaceChild(messedUpEvilNode->parent, messedUpEvilNode, leftRightChild);
+    //sets the parents
+    rightChild->parent = messedUpEvilNode->parent;
+    messedUpEvilNode->parent = rightChild;
+    //sets the pointer for left child if there is one
+    if (leftChild != nullptr) {
+        leftChild->parent = messedUpEvilNode;
     }
-    else {
-        //node is root
-        root = leftRightChild;
-        root-> parent = nullptr;
+    // if the rotation happens to root then root becomes the rightChild
+    if (rightChild->parent == nullptr) {
+        root = rightChild;
     }
-    //set right child left child to messedUpEvilNode
-    AVLTreeSetChild(leftRightChild, "left", messedUpEvilNode);
-    //set right child to rightLeftChild
-    AVLTreeSetChild(messedUpEvilNode, "right", leftRightChild);
-    //update heights
+    //calls updateTreeHeight for the two nodes
     updateTreeHeight(messedUpEvilNode);
-    updateTreeHeight(leftRightChild);  // new subtree root after rotation
-    //return root once done
-    return leftRightChild;
+    updateTreeHeight(rightChild);
+    //finally returns the rightChild
+    return rightChild;
 }
 //this function sets the left and right child based on the parameter used with rotation. Taken from zybooks
 bool AVLTree::AVLTreeSetChild(AVLNode *parent, const std::string &leftOrRight ,AVLNode *child) {
