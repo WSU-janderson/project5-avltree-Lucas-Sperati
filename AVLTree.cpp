@@ -5,6 +5,9 @@
 //This file implements all the methods that are used for the avlTree
 
 
+//No idea if the functions have the right time complexity. This project was awful and I cannot be bothered to mess with
+//it anymore. Sorry it is a day late
+
 
 #include "AVLTree.h"
 
@@ -79,7 +82,7 @@ bool AVLTree::removeNode(AVLNode*& current){
         current->height = current->getHeight();
         balanceNode(current);
 
-        return true; // we already deleted the one we needed to so return
+        return true; //we already deleted the one we needed to so return
     }
     delete toDelete;
 
@@ -302,7 +305,6 @@ int AVLTree::treeBalance(AVLNode *node) {
 }
 //---------------------------------------------------------------
 
-//todo recursion
 //Inserts a new key-value pair into the tree. After a successful insert the tree is rebalanced if needed.
 //No duplicates. Should return true if insertion was successful and false if not
 //Time complexity must be 0(log2 n)
