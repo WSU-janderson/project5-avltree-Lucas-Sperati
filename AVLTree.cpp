@@ -144,8 +144,8 @@ AVLTree::AVLNode* AVLTree::balanceNode(AVLNode* node) {
             node->right = rotateRight(node->right);
         }
         //rotates left then
-        AVLNode* newRoot = roatateLeft(node);
-        return newRoot;
+        AVLNode* leftRoot = roatateLeft(node);
+        return leftRoot;
     }
     //left balance
     else if (balance == 2) {
@@ -159,8 +159,8 @@ AVLTree::AVLNode* AVLTree::balanceNode(AVLNode* node) {
             }
         }
         //rotate right then
-        AVLNode* newRoot = rotateRight(node);
-        return newRoot;
+        AVLNode* rightRoot = rotateRight(node);
+        return rightRoot;
     }
     return node;
 }
@@ -175,28 +175,33 @@ AVLTree::AVLNode* AVLTree::rotateRight(AVLNode *&messedUpEvilNode) {
     if (messedUpEvilNode->left == nullptr) {
         return nullptr;
     }
-    //node to get the left-right of the node
-    AVLNode* leftRightChild = messedUpEvilNode->left->right;
-
-    //ff node has a parent then replaces that node with its left child
-    if (messedUpEvilNode->parent != nullptr) {
-        AVLTreeReplaceChild(messedUpEvilNode->parent, messedUpEvilNode, messedUpEvilNode->left);
+    //nodes for left and right child
+    AVLNode* leftChild = messedUpEvilNode->left;
+    AVLNode* rightChild = leftChild->right;
+    //rotates right. swaps messedUpEvilNode and leftchild and then makes messedUpEvilNode the right child for
+    //leftchild
+    //this took me so long to figure out, assuming it even works!
+    leftChild->right = messedUpEvilNode;
+    messedUpEvilNode->left = rightChild;
+    //sets the parent pointers
+    leftChild->parent = messedUpEvilNode->parent;
+    messedUpEvilNode->parent = leftChild;
+    //zybooks part that roughly stayed the same
+    //sets the rightChild's parent
+    if (rightChild != nullptr) {
+        rightChild->parent = messedUpEvilNode;
     }
-    else {  //node is not root
-        root = messedUpEvilNode->left;
-        root-> parent = nullptr;
+    //if this happends on the root then it sets the root to the leftchild
+    if (leftChild->parent == nullptr) {
+        root = leftChild;
     }
-    //set left child right child to node for rotation
-    AVLTreeSetChild(messedUpEvilNode->left, "right", messedUpEvilNode);
-    //set node left child to leftRightChild
-    AVLTreeSetChild(messedUpEvilNode, "left", leftRightChild);
-    //updates the height
+    //sets the heights by calling updateTreeHeight on the two nodes
     updateTreeHeight(messedUpEvilNode);
-    //updates height again since the parent of the messedUpEvilNode is the root
-    updateTreeHeight(messedUpEvilNode->parent);
-    //returns true when successful
-    return leftRightChild;
+    updateTreeHeight(leftChild);
+    //finally returns the leftChild
+    return leftChild;
 }
+
 //this function rotates the node on the tree to the left
 AVLTree::AVLNode* AVLTree::roatateLeft(AVLNode *&messedUpEvilNode) {
     //if the node does not exist it returns false
